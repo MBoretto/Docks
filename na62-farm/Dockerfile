@@ -11,9 +11,27 @@ RUN	dnf install git	-y													&& \
 	dnf install boost -y												&& \
 	dnf install glog -y
 
+#Complete the eclipse installation with plugin
+#http://stackoverflow.com/questions/7163970/how-do-you-automate-the-installation-of-eclipse-plugins-with-command-line
+
+
+
+# Replace (uid, gid) 1000 with your user / group 
+#id your_username
+RUN export uid=1001 gid=1001																	&& \
+	mkdir -p /home/developer																	&& \
+	echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd		&& \
+	echo "developer:x:${uid}:" >> /etc/group													&& \
+	echo "developer ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers									&& \
+	chmod 0440 /etc/sudoers																		&& \
+	chown ${uid}:${gid} -R /home/developer
+
+USER developer
+ENV HOME /home/developer
+
 #acquiring software
-RUN mkdir /workspace/													&& \
-	cd /workspace/														&& \
+RUN mkdir ${HOME}/workspace/													&& \
+	cd ${HOME}/workspace/														&& \
 	git clone https://github.com/NA62/na62-farm-lib.git					&& \
 	git clone https://github.com/NA62/na62-trigger-algorithms.git		&& \
 	git clone https://github.com/NA62/na62-trigger-test.git				&& \
@@ -25,18 +43,6 @@ RUN mkdir /workspace/													&& \
 	git clone https://github.com/NA62/na62-farm-telsim.git				
 
 
-# Replace (uid, gid) 1000 with your user / group 
-#id your_username
 
-RUN export uid=1001 gid=1001 && \
-    mkdir -p /home/developer && \
-    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:${uid}:" >> /etc/group && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
-
-USER developer
-ENV HOME /home/developer
 
 CMD /bin/bash
