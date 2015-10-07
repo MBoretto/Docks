@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo 'Creating Shared home...'
+BASEDIR=`pwd`
+DOCKUSERNAME='developer'
+HOSTHOME=${BASEDIR}/${DOCKUSERNAME}
+
+if [ -d "${HOSTHOME}" ]; then
+	echo ${HOSTHOME}" Already Exist! Delete to reinstall"
+else 
+
+	mkdir ${HOSTHOME}
+	
+	echo 'Fetching remote Na62 Repository...'
+	
+	#acquiring software
+	mkdir ${HOSTHOME}/workspace/									
+	cd ${HOSTHOME}/workspace/										
+	git clone https://github.com/NA62/na62-farm-lib.git				
+	git clone https://github.com/NA62/na62-trigger-algorithms.git	
+	git clone https://github.com/NA62/na62-trigger-test.git			
+	git clone https://github.com/NA62/na62-farm-lib-networking.git	
+	git clone https://github.com/NA62/na62-farm-dim-interface.git	
+	git clone https://github.com/NA62/na62-farm.git					
+	git clone https://github.com/NA62/na62-farm-merger.git			
+	git clone https://github.com/NA62/na62-farm-eob-collector.git	
+	git clone https://github.com/NA62/na62-farm-telsim.git	
+	
+	cd ${BASEDIR}
+    #start to build the container
+	./build
+fi

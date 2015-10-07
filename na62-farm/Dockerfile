@@ -2,17 +2,14 @@ FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
 
 #uptating
-RUN dnf update -y														
+RUN dnf update -y		&& \
+	dnf clean all								
 
-#installing dependencies
-RUN	dnf install git	-y													&& \	
-	dnf install eclipse	-y												&& \
-	dnf install tbb	-y													&& \
-	dnf install boost -y												&& \
-	dnf install glog -y
-
-#Complete the eclipse installation with plugin
-#http://stackoverflow.com/questions/7163970/how-do-you-automate-the-installation-of-eclipse-plugins-with-command-line
+#installing Software
+RUN	dnf install eclipse libcanberra-gtk3 -y
+RUN dnf install wget tar file -y
+RUN dnf install git gcc-c++ make -y
+RUN dnf install tbb tbb-devel boost boost-devel glog glog-devel -y	
 
 
 
@@ -28,21 +25,5 @@ RUN export uid=1001 gid=1001																	&& \
 
 USER developer
 ENV HOME /home/developer
-
-#acquiring software
-RUN mkdir ${HOME}/workspace/													&& \
-	cd ${HOME}/workspace/														&& \
-	git clone https://github.com/NA62/na62-farm-lib.git					&& \
-	git clone https://github.com/NA62/na62-trigger-algorithms.git		&& \
-	git clone https://github.com/NA62/na62-trigger-test.git				&& \
-	git clone https://github.com/NA62/na62-farm-lib-networking.git		&& \
-	git clone https://github.com/NA62/na62-farm-dim-interface.git		&& \
-	git clone https://github.com/NA62/na62-farm.git						&& \
-	git clone https://github.com/NA62/na62-farm-merger.git				&& \
-	git clone https://github.com/NA62/na62-farm-eob-collector.git		&& \
-	git clone https://github.com/NA62/na62-farm-telsim.git				
-
-
-
 
 CMD /bin/bash
