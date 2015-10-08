@@ -1,20 +1,32 @@
 FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
 
-#uptating
-RUN dnf update -y		&& \
-	dnf clean all								
 
-#installing Software
+# Please notice that the UID and likely the GID must accord with the permissions of the sockets
+# stored in /tmp/.X11-unix. 
+# Please configure them under your needs.
+ENV UID="1000" GID="1000" DEVELOPER="developer" PASSWD="myfancypassword"
+ENV HOME="/home/$DEVELOPER"
+
+# Update system... 
+# Please notice that this is in general not recomendable, 
+# since you are not controlling which version of the software 
+# will be installed on your system.
+# This may cause not predictable misbehaviours.
+RUN dnf update -y && dnf clean all
+
+# Install prerequisites.
 RUN	dnf install eclipse libcanberra-gtk3 -y
 
 RUN dnf install wget tar file -y
 
 RUN dnf install git gcc-c++ make -y
 
-RUN dnf install tbb tbb-devel boost boost-devel glog glog-devel -y	
-RUN dnf install gflags-devel cppzmq-devel libpcap libpcap-devel gperftools-libs -y
-
+RUN dnf install \
+	tbb tbb-devel boost boost-devel \
+	glog glog-devel gflags-devel \
+	cppzmq-devel libpcap libpcap-devel \
+	gperftools-libs -y 
 
 #Dowload Pfring include
 RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring.h -o pf_ring.h &&\
@@ -23,7 +35,10 @@ RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring
 #installing DIM
 RUN dnf install tcsh -y
 
-USER root
-ENV HOME /root
+RUN groupadd -g$GID -f developers && \
+   useradd -g$GID -u$UID -d $HOME -p $PASSWD $DEVELOPER && \
+   usermod $DEVELOPER -a -G wheel
+
+USER $DEVELOPER
 
 CMD /bin/bash

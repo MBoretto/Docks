@@ -1,10 +1,13 @@
 #!/bin/bash
 
+DOCKUSERNAME='developer'
 
-#docker run -ti --rm -e DISPLAY=$DISPLAY \
-#    -v `pwd`/developer:/home/developer \
-#	-v /tmp/.X11-unix:/tmp/.X11-unix \
-#	na62-farm
+${DOCKUSERNAME}
+docker run -ti --rm \
+    -v `pwd`/${DOCKUSERNAME}:/home/${DOCKUSERNAME} \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+	-e DISPLAY=unix$DISPLAY \
+	na62-farm
 
 docker run -ti --rm \
     -v `pwd`/root:/root \
