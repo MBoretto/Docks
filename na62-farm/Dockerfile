@@ -1,13 +1,6 @@
 FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
 
-
-# Please notice that the UID and likely the GID must accord with the permissions of the sockets
-# stored in /tmp/.X11-unix. 
-# Please configure them under your needs.
-ENV UID="1000" GID="1000" DEVELOPER="developer" PASSWD="myfancypassword"
-ENV HOME="/home/$DEVELOPER"
-
 # Update system... 
 # Please notice that this is in general not recomendable, 
 # since you are not controlling which version of the software 
@@ -34,6 +27,14 @@ RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring
 
 #installing DIM
 RUN dnf install tcsh -y
+RUN dnf install motif-devel -y
+
+
+# Please notice that the UID and likely the GID must accord with the permissions of the sockets
+# stored in /tmp/.X11-unix. 
+# Please configure them under your needs.
+ENV UID="1001" GID="1001" DEVELOPER="developer" PASSWD="myfancypassword"
+ENV HOME="/home/$DEVELOPER"
 
 RUN groupadd -g$GID -f developers && \
    useradd -g$GID -u$UID -d $HOME -p $PASSWD $DEVELOPER && \
