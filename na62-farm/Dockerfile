@@ -1,37 +1,27 @@
 FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
+# Please notice that the UID and likely the GID must accord with the permissions of the sockets
+# stored in /tmp/.X11-unix. 
+# Please configure them under your needs.
+ENV UID="1000" GID="1000" DEVELOPER="developer" PASSWD="myfancypassword"
+ENV HOME="/home/$DEVELOPER"
 
-#uptating
-RUN dnf update -y		&& \
-	dnf clean all								
+# Update system... 
+# Please notice that this is in general not recomendable, 
+# since you are not controlling which version of the software 
+# will be installed on your system.
+# This may cause not predictable misbehaviours.
 
-#installing Software
-RUN	dnf install eclipse libcanberra-gtk3 -y
-RUN dnf install wget tar file -y
-RUN dnf install git gcc-c++ make -y
-RUN dnf install tbb tbb-devel boost boost-devel glog glog-devel -y	
-RUN dnf install gflags-devel -y
-RUN dnf install mlocate -y
-RUN dnf install cppzmq-devel -y
-RUN dnf install libpcap -y
+RUN dnf update -y && dnf clean all     && \
+# Install prerequisites.
+    dnf install -y eclipse libcanberra-gtk3  \
+       wget tar file git gcc-c++ make tbb \
+       tbb-devel boost boost-devel glog   \
+       glog-devel
 
+RUN groupadd -g$GID -f developers && \
+   useradd -g$GID -u$UID -d $HOME -p $PASSWD $DEVELOPER && \
+   usermod $DEVELOPER -a -G wheel
 
-
-
-
-#Replace (uid, gid) 1000 with your user / group 
-#id your_username
-
-#RUN export uid=1001 gid=1001																	&& \
-#	mkdir -p /home/developer																	&& \
-#	echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd		&& \
-#	echo "developer:x:${uid}:" >> /etc/group													&& \
-#	echo "developer ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers									&& \
-#	chmod 0440 /etc/sudoers																		&& \
-#	chown ${uid}:${gid} -R /home/developer
-
-#RUN export uid=0 gid=0
-USER root
-ENV HOME /root
-
+USER $DEVELOPER
 CMD /bin/bash
