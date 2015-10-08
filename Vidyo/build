@@ -1,4 +1,4 @@
 #!/bin/bash
 echo 'Building container...'
-docker build -t na62-farm .
+docker build -t vidyo .
 echo 'Type ./run to start the container...'

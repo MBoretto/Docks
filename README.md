@@ -31,6 +31,12 @@ Edit */etc/default/docker*, uncomment the line:
 and add the dns previously found.
 
     sudo service docker restart
+###X11 troubleshooting
+
+	xhost +x
+Add a user to the list of f authorised access to the X server.
+
+	xhost si:localuser:root
 
 ###Thanks to 
 Mconcas for [inspiring](https://github.com/mconcas/docks)

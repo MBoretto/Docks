@@ -1,8 +1,13 @@
 FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
 
-RUN dnf update -y														&& \
-	dnf install whatever -y
+RUN dnf update -y       && \                                                                                                                                                                           
+    dnf clean all  
+
+
+RUN dnf install whatever -y
+
+#xhost +
 
 
 #Debian/Ubuntu system based

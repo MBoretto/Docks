@@ -2,7 +2,8 @@
 
 echo 'Creating Shared home...'
 BASEDIR=`pwd`
-DOCKUSERNAME='developer'
+DOCKUSERNAME='root'
+#DOCKUSERNAME='developer'
 HOSTHOME=${BASEDIR}/${DOCKUSERNAME}
 
 if [ -d "${HOSTHOME}" ]; then

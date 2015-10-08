@@ -1,12 +1,23 @@
 #!/bin/bash
+
+
 #docker run -ti --rm -e DISPLAY=$DISPLAY \
-#    -v `pwd`/.eclipse:/home/developer/.eclipse \
+#    -v `pwd`/developer:/home/developer \
 #	-v /tmp/.X11-unix:/tmp/.X11-unix \
 #	na62-farm
 
-
-
-docker run -ti --rm -e DISPLAY=$DISPLAY \
-    -v `pwd`/developer:/home/developer \
+docker run -ti --rm \
+    -v `pwd`/root:/root \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
 	na62-farm
+
+
+
+# docker run -d \
+#	-v /etc/localtime:/etc/localtime:ro \
+#	-v /tmp/.X11-unix:/tmp/.X11-unix \
+#	-e DISPLAY=unix$DISPLAY \
+#	-v $HOME/Pictures:/root/Pictures \
+#	--name gimp \
+#	jess/gimp
