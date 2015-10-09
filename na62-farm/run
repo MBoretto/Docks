@@ -1,25 +1,15 @@
 #!/bin/bash
 
-DOCKUSERNAME='developer'
-
-docker run -ti --rm \
-    -v `pwd`/${DOCKUSERNAME}:/home/${DOCKUSERNAME} \
-	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-e DISPLAY=unix$DISPLAY \
-	na62-farm
-
+#DOCKUSERNAME='developer'
 #docker run -ti --rm \
-#    -v `pwd`/root:/root \
-#	-v /tmp/.X11-unix:/tmp/.X11-unix \
-#    -e DISPLAY=unix$DISPLAY \
-#	na62-farm
-
-
-
-# docker run -d \
-#	-v /etc/localtime:/etc/localtime:ro \
+#    -v `pwd`/${DOCKUSERNAME}:/home/${DOCKUSERNAME} \
 #	-v /tmp/.X11-unix:/tmp/.X11-unix \
 #	-e DISPLAY=unix$DISPLAY \
-#	-v $HOME/Pictures:/root/Pictures \
-#	--name gimp \
-#	jess/gimp
+#	na62-farm
+
+docker run -ti --rm \
+   -v `pwd`/root:/root \
+	-v /tmp/.X11-unix:/tmp/.X11-unix \
+   -e DISPLAY=unix$DISPLAY \
+	na62-farm
+
