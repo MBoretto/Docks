@@ -56,5 +56,9 @@ RUN updatedb
 #USER $DEVELOPER
 #WORKDIR $HOME
 
+#TODO Add this in the bottom when you have time to rebuilt everthing
+RUN dnf install procps-ng net-tools htop tcpreplay -y
+#TODO
+
 WORKDIR /root
 CMD /bin/bash
