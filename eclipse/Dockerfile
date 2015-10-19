@@ -15,33 +15,11 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch
 #RUN dnf update -y && dnf clean all
 
 # Install prerequisites.
-RUN	dnf install eclipse libcanberra-gtk3 -y
-
-RUN dnf install wget tar file mlocate htop\
+RUN	dnf install eclipse libcanberra-gtk3 \
+    wget tar file mlocate htop vim\
     psmisc procps-ng \
-    net-tools tcpreplay pcapfix iputils nc \
-	git gcc-c++ make \
-	tbb tbb-devel boost boost-devel \
-	glog glog-devel gflags-devel \
-	cppzmq-devel libpcap libpcap-devel \
-	gperftools gperftools-libs \ 
-#Those are required from DIM
-	tcsh motif-devel -y
-
-#Dowload Pfring include
-#RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring.h -o pf_ring.h &&\
-#Adding some pfring include
-ADD usr/include/linux/pf_ring.h /usr/include/linux/
-ADD usr/local/include/pfring.h /usr/local/include/
-
-#installing DIM
-ADD compileDIM /compileDIM
-
-#DIM is compiled in  tcsh environment as described in the documentation
-RUN ./compileDIM && \
-#a sort of make install
-	cp -R /dim_v20r15/dim/ /usr/local/include/ && \
-	cp /dim_v20r15/obj/libdim.* /usr/local/lib/
+    net-tools iputils nc \
+	git -y 
 
 
 #update the locate db

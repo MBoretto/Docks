@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo 'Creating Shared home...'
+BASEDIR=`pwd`
+DOCKUSERNAME='root'
+#DOCKUSERNAME='developer'
+HOSTHOME=${BASEDIR}/${DOCKUSERNAME}
+
+if [ -d "${HOSTHOME}" ]; then
+	echo ${HOSTHOME}" Already Exist! Delete to reinstall"
+else 
+	mkdir ${HOSTHOME}
+	cd ${BASEDIR}
+    #start to build the container
+	./build
+fi

@@ -64,11 +64,11 @@ right click on the projecti ->Properties
 
 ----
 
-"${workspace_loc:/${ProjName}}"
-/usr/lib64
-"${workspace_loc:/na62-farm-lib}"
-"${workspace_loc:/na62-farm-lib-networking}"
-"${workspace_loc:/na62-trigger-algorithms}"
+"${workspace_loc:/${ProjName}}"  
+/usr/lib64  
+"${workspace_loc:/na62-farm-lib}"  
+"${workspace_loc:/na62-farm-lib-networking}"  
+"${workspace_loc:/na62-trigger-algorithms}"  
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
@@ -132,53 +132,53 @@ tbb
 
 --------
 
-/usr/lib64
-"${workspace_loc:/na62-farm-lib-networking/Debug}"
-"${workspace_loc:/na62-trigger-algorithms/Debug_GLOG}"
-"${workspace_loc:/na62-farm-lib/GLOG_DEBUG}"
+/usr/lib64  
+"${workspace_loc:/na62-farm-lib-networking/Debug}"  
+"${workspace_loc:/na62-trigger-algorithms/Debug_GLOG}"  
+"${workspace_loc:/na62-farm-lib/GLOG_DEBUG}"  
 
 ###Na62Farm-lib
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 
 ------------
 
-/usr/lib64
+/usr/lib64  
 
 ###Na62Farm-lib-networking
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)
-"${workspace_loc:/na62-farm-lib}"
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include
+"${workspace_loc:/na62-farm-lib}"  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
 ---------------
 
-"${workspace_loc:/na62-farm-lib}"
-/usr/lib64
+"${workspace_loc:/na62-farm-lib}"  
+/usr/lib64  
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
-"${workspace_loc:/na62-farm-lib}"
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include
+"${workspace_loc:/na62-farm-lib}"  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
 ------
 
-/usr/lib64
-"${workspace_loc:/na62-farm-lib}"
+/usr/lib64  
+"${workspace_loc:/na62-farm-lib}"  
 
 
 ###Na62Farm-trigger-algorithms
-rkspace_loc:/na62-farm-lib}"
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include
-/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include
-/afs/cern.ch/sw/lcg/external/Boost/1.55.0_python2.7/x86_64-slc6-gcc47-opt/include/boost-1_55/
-/sw/opt/boost-1_55/include
+rkspace_loc:/na62-farm-lib}"  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
+/afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
+/afs/cern.ch/sw/lcg/external/Boost/1.55.0_python2.7/x86_64-slc6-gcc47-opt/include/boost-1_55/  
+/sw/opt/boost-1_55/include  
 
 ----
 
@@ -188,7 +188,7 @@ rkspace_loc:/na62-farm-lib}"
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
-"${workspace_loc:/na62-farm-lib}"
+"${workspace_loc:/na62-farm-lib}"  
 
 ##Start the farm locally
 ```
