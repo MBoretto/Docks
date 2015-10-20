@@ -28,6 +28,8 @@ RUN dnf install wget tar file mlocate htop\
 #Those are required from DIM
 	tcsh motif-devel -y
 
+RUN dnf install wireshark -y
+
 #Dowload Pfring include
 #RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring.h -o pf_ring.h &&\
 #Adding some pfring include
@@ -43,7 +45,10 @@ RUN ./compileDIM && \
 	cp -R /dim_v20r15/dim/ /usr/local/include/ && \
 	cp /dim_v20r15/obj/libdim.* /usr/local/lib/
 
-
+#Move farm configuration files
+ADD etc/na62-farm.cfg /etc/na62-farm.cfg
+ADD etc/na62-trigger.conf /etc/na62-trigger.conf
+  
 #update the locate db
 RUN updatedb
 
