@@ -17,7 +17,7 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch
 # Install prerequisites.
 RUN	dnf install eclipse libcanberra-gtk3 -y
 
-RUN dnf install wget tar file mlocate htop\
+RUN dnf install wget tar file mlocate vim htop\
     psmisc procps-ng \
     net-tools tcpreplay pcapfix iputils nc \
 	git gcc-c++ make \
@@ -29,6 +29,10 @@ RUN dnf install wget tar file mlocate htop\
 	tcsh motif-devel -y
 
 RUN dnf install wireshark -y
+#wireshark provided by seems not work..
+#RUN rpm -ivh ftp://fr2.rpmfind.net/linux/fedora/linux/updates/testing/22/x86_64/w/wireshark-1.12.8-1.fc22.x86_64.rpm
+
+
 
 #Dowload Pfring include
 #RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring.h -o pf_ring.h &&\

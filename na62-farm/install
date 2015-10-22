@@ -23,11 +23,15 @@ else
 	git clone https://github.com/NA62/na62-farm-lib-networking.git	
 	git clone https://github.com/NA62/na62-farm-dim-interface.git	
 	git clone https://github.com/NA62/na62-farm.git					
-	git clone https://github.com/NA62/na62-farm-merger.git			
+	git clone https://github.com/NA62/na62-farm-merger.git	
 #   Deprecated
 #	git clone https://github.com/NA62/na62-farm-eob-collector.git	
 	git clone https://github.com/NA62/na62-farm-telsim.git	
 	git clone https://github.com/NA62/na62-farm-monitor-collector.git	
+#trigger test
+	git clone https://github.com/NA62/na62-trigger-test.git
+#Script
+	git clone https://github.com/NA62/na62-farm-misc.git
 	cd ${BASEDIR}
     #start to build the container
 	./build
