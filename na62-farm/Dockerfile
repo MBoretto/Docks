@@ -15,9 +15,9 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch
 #RUN dnf update -y && dnf clean all
 
 # Install prerequisites.
-RUN	dnf install eclipse libcanberra-gtk3 -y
+RUN dnf install eclipse libcanberra-gtk3 -y
 
-RUN dnf install wget tar file mlocate vim htop\
+RUN dnf install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
     net-tools tcpreplay pcapfix iputils nc \
 	git gcc-c++ make \
