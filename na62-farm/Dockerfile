@@ -20,7 +20,7 @@ RUN dnf install eclipse libcanberra-gtk3 -y
 RUN dnf install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
     net-tools tcpreplay pcapfix iputils nc \
-	git gcc-c++ make \
+	git gcc-c++ make gdb \
 	tbb tbb-devel boost boost-devel \
 	glog glog-devel gflags-devel \
 	cppzmq-devel libpcap libpcap-devel \
