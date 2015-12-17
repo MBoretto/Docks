@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source ./loadENV
+
+docker run -ti --rm \
+   -v /var/www/html:$DOCUMENTROOT \
+   php:5.5-cli /bin/bash
+
