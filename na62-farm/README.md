@@ -30,7 +30,7 @@ All the environment will be installed according to the *Dockerfile*.
 ###Dns troubleshooting   
 If you are behind a dns server Docker will probably fail the the step above.
 Follow this recipe to configure your dns.  
-Set properly the dns if any as described below:
+
 Identify your DNS using the following commad:
 
 	nmcli -t -f IP4.DNS device show <your device name>
@@ -43,8 +43,8 @@ and add the dns previously found.
 
     sudo service docker restart
 
-##Stat the container
-If the container has been buil correctly start it with:
+##Start the container
+If the container has been build correctly start it with:
 
 	./run
 
@@ -54,7 +54,7 @@ If the container has been buil correctly start it with:
 
 set the environment to */root/workspace*
 
-Open the widow: Help->Install New Software  
+Open the widonw: Help->Install New Software  
 Check avaible software, and install:
 
 - C/C++ Development Tools SDK
@@ -68,7 +68,8 @@ Here's how to fix it:
 Add a user to the list of authorised access to the X server.
 
 	xhost si:localuser:root
-This operation shuold be done each time you restart your computer, it's a good idea add this command in the *.bashrc* file.
+
+This operation should be done each time you restart your computer, it's a good idea add this command in the *.bashrc* file.
 
 ### Tips for develop
 If you need an additional terminals to work with the farm container type:
