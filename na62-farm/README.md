@@ -1,13 +1,39 @@
 #Na62-farm
 This container recreate the environment of the na62-farm experiment.
+I used the ubunutu 15.10 distribution.
 ##Get Docker
 
-##Dns troubleshooting   
+	sudo apt-get -y install docker.io
 
+Use docker without sudo:
+
+    sudo groupadd docker
+    sudo gpasswd -a <your username> docker
+    sudo service docker restart
+
+Restart the system if needed.
+
+##Build the Environment
+Download the container image from this repository
+
+	git clone https://github.com/MBoretto/Docks
+
+move to the na62 dir and build the container with:
+	
+	./install
+
+This command will create the *root/workspace/* directory and clone inside all the na62 repositories.
+Please notice that this directory is shared with the container */root/* home directory. 
+So every change you do on the code inside the container will be visible outside the container.
+All the environment will be installed according to the *Dockerfile*.
+
+###Dns troubleshooting   
+If you are behind a dns server Docker will probably fail the the step above.
+Follow this recipe to configure your dns.  
 Set properly the dns if any as described below:
 Identify your DNS using the following commad:
 
-    nm-tool | grep DNS
+	nmcli -t -f IP4.DNS device show <your device name>
 
 Edit */etc/default/docker*, uncomment the line:  
 
@@ -17,26 +43,8 @@ and add the dns previously found.
 
     sudo service docker restart
 
-##X11 troubleshooting
-Add a user to the list of f authorised access to the X server.
-
-	xhost +x
-
-Add a user to the list of authorised access to the X server.
-
-	xhost si:localuser:root
-
-##Build the Environment
-Download the software farm and build the container:
-	
-	./install
-
-This command will create the *root/workspace/* directory and clone inside all a the na62 repositories.
-Please notice that this directory is shared with the container */root/* home directory. 
-So every change you do on the code inside the container will be visible outside the container.
-All the environment will be installed according to the *Dockerfile*.
-
-then start the container with 
+##Stat the container
+If the container has been buil correctly start it with:
 
 	./run
 
@@ -50,16 +58,25 @@ Open the widow: Help->Install New Software
 Check avaible software, and install:
 
 - C/C++ Development Tools SDK
+- Git extension
 
-All the eclipse extension will be stored in the home directory */root/* this directory is shared with the filesystem so you don't need to reistall extension every time.
+All the eclipse extension will be stored in the home directory */root/* this directory is shared with the filesystem so you don't need to reinstall extension every time.
+
+###X11 troubleshooting   
+If x11 is not setted properly GUI program (Eclipse) lauched inside the container will fail.
+Here's how to fix it:
+Add a user to the list of authorised access to the X server.
+
+	xhost si:localuser:root
+This operation shuold be done each time you restart your computer, it's a good idea add this command in the *.bashrc* file.
+
 ### Tips for develop
 If you need an additional terminals to work with the farm container type:
 
 	docker exec -it <container-id press tab to autocomplete> bash
 
 ##Import the Projects
-
-Press: 
+Start Eclipse and press: 
 ```
 File->Import
 	General->existing Project into workspace
@@ -69,31 +86,43 @@ Set */root/workspace* and select those projects:
 - na62-farm
 - na62-lib
 - na62-lib-networking
-- na62-then 
 
 Then press Finish.
 
 ## Compile the Projects
-To compile the farm project you should upate the build options according to the container environment.
-Section below will show you how to change this options properly.
+To compile the farm projects you should upate the build options according to the container environment.
+Section below will show you how to change this options properly. 
 Plese notice that the local farm will work on the socket packets handler and not on the PFring one.
 
+Projects properties are accessible with: 
+
+	right click on the project -> Properties
 
 ##Remove PFring dependencies
-right click on the project -> Properties
-	C/C++ Build-> settings 
-		GCC C++ compiler -> Preprocessor
-set USE_PFRING to NUSE_PFRING
+Consider the following projects:
 
 - na62-farm   
 - na62-farm-lib-networking
 
-In na62-farm-lib-networking exclude the PFring.cpp: Right click on the file -> Resources configuration -> Exclude from Build
+
+For each one open project properties dialog then: 
+
+	C/C++ Build-> settings 
+		GCC C++ compiler -> Preprocessor
+
+set USE_PFRING to NUSE_PFRING
+
+
+In na62-farm-lib-networking exclude from build the *PFring.cpp*: 
+Right click on the file -> Resources configuration -> Exclude from Build
+
 ##Setting libs
-right click on the projecti ->Properties
+Open the project Properties dialog then: 
+
 	C/C++ Build-> settings
 
 ###Na62Farm
+This configuration 
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)  
 "${workspace_loc:/na62-farm-lib-networking}"  
