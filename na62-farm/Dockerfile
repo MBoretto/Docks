@@ -1,12 +1,6 @@
 FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch
 
-# Please notice that the UID and likely the GID must accord with the permissions of the sockets
-# stored in /tmp/.X11-unix. 
-# Please configure them under your needs.
-#ENV UID="1001" GID="1001" DEVELOPER="developer" PASSWD="myfancypassword"
-#ENV HOME="/home/$DEVELOPER"
-
 # Update system... 
 # Please notice that this is in general not recomendable, 
 # since you are not controlling which version of the software 
@@ -29,22 +23,21 @@ RUN dnf install wget tar file mlocate vim htop unzip\
 #Those are required from DIM
     tcsh motif-devel -y
 
+#due to a docker bug problem wireshark is not working
 RUN dnf install wireshark -y
 #wireshark provided by seems not work..
 #RUN rpm -ivh ftp://fr2.rpmfind.net/linux/fedora/linux/updates/testing/22/x86_64/w/wireshark-1.12.8-1.fc22.x86_64.rpm
 
 
 
-#Dowload Pfring include
-#RUN curl https://raw.githubusercontent.com/ntop/PF_RING/dev/kernel/linux/pf_ring.h -o pf_ring.h &&\
-#Adding some pfring include
+#Adding some pfring include needed to compile
 ADD usr/include/linux/pf_ring.h /usr/include/linux/
 ADD usr/local/include/pfring.h /usr/local/include/
 
 #installing DIM
 ADD compileDIM /compileDIM
 
-#DIM is compiled in  tcsh environment as described in the documentation
+#DIM is compiled in  tcsh environment as described in the official documentation
 RUN ./compileDIM && \
 #a sort of make install
 	cp -R /dim_v20r15/dim/ /usr/local/include/ && \
@@ -56,12 +49,6 @@ ADD etc/na62-trigger.conf /etc/na62-trigger.conf
   
 #update the locate db
 RUN updatedb
-
-#RUN groupadd -g$GID -f developers && \
-#   useradd -g$GID -u$UID -d $HOME -p $PASSWD $DEVELOPER && \
-#   usermod $DEVELOPER -a -G wheel
-#USER $DEVELOPER
-#WORKDIR $HOME
 
 WORKDIR /root
 CMD /bin/bash

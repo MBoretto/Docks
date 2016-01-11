@@ -1,13 +1,40 @@
 #Na62-farm
+This container recreate the environment of the na62-farm experiment.
+##Get Docker
 
-##Before start
-Set properly the dns if any as described in the main README
+##Dns troubleshooting   
+
+Set properly the dns if any as described below:
+Identify your DNS using the following commad:
+
+    nm-tool | grep DNS
+
+Edit */etc/default/docker*, uncomment the line:  
+
+    DOCKER_OPTS="--dns <your_dns_server_1> --dns <your_dns_server_2>"
+
+and add the dns previously found.
+
+    sudo service docker restart
+
+##X11 troubleshooting
 Add a user to the list of f authorised access to the X server.
 
-##Install the na62-farm repos
-Download the sofware farm and build the container:
+	xhost +x
+
+Add a user to the list of authorised access to the X server.
+
+	xhost si:localuser:root
+
+##Build the Environment
+Download the software farm and build the container:
 	
 	./install
+
+This command will create the *root/workspace/* directory and clone inside all a the na62 repositories.
+Please notice that this directory is shared with the container */root/* home directory. 
+So every change you do on the code inside the container will be visible outside the container.
+All the environment will be installed according to the *Dockerfile*.
 
 then start the container with 
 
@@ -24,20 +51,33 @@ Check avaible software, and install:
 
 - C/C++ Development Tools SDK
 
-##Import Project
+All the eclipse extension will be stored in the home directory */root/* this directory is shared with the filesystem so you don't need to reistall extension every time.
+### Tips for develop
+If you need an additional terminals to work with the farm container type:
+
+	docker exec -it <container-id press tab to autocomplete> bash
+
+##Import the Projects
+
+Press: 
+```
 File->Import
 	General->existing Project into workspace
+```
 
-Set /root/workspace
-Select the projects
-farm
-lib
-lib-networking
-then click Finish
+Set */root/workspace* and select those projects:
+- na62-farm
+- na62-lib
+- na62-lib-networking
+- na62-then 
 
-###Remove from workspace
-PFring.cpp
-PFring.h 
+Then press Finish.
+
+## Compile the Projects
+To compile the farm project you should upate the build options according to the container environment.
+Section below will show you how to change this options properly.
+Plese notice that the local farm will work on the socket packets handler and not on the PFring one.
+
 
 ##Remove PFring dependencies
 right click on the project -> Properties
@@ -201,6 +241,33 @@ rkspace_loc:/na62-farm-lib}"
 /root/workspace/na62-farm/Debug/na62-farm --L0DataSourceIDs=0x4:6,0xc:2,0x18:1,0x8:3,0x20:1,0x40:1,0x10:12,0x24:442,0x30:1,0x1c:4,0x14:32,0x44:1 --ethDeviceName=eth0 --verbosity=3 --maxNumberOfEventsPerBurst=20000 &
 
 ```
+
+#Adding jumbo frame suppor inside the virtual docker0 bridge
+MTU (maximum transmission unit) is the maximum packets dimension (in byte) allowed by the network interface.
+Packets payload in every-day-life hardware is limited to 1500 byte.
+NA62 exploits jumbo packets to transmits data to the farm. 
+The following recipe will show you how to to changhe mtu for the docker bridge.
+
+	sudo vim /lib/systemd/system/docker.service
+
+Replace the line:
+
+	ExecStart=/usr/bin/docker daemon -H fd://
+
+with:
+
+	ExecStart=/usr/bin/docker daemon -H fd:// --mtu=9000 
+
+then:
+
+    systemctl daemon-reload
+    sudo service docker restart
+    sudo systemctl status docker
+
+you can check updated MTU with
+
+	ifconfig
+
 ## Replay the traffic with tcpreplay
 http://xmodulo.com/how-to-capture-and-replay-network-traffic-on-linux.html
 tcpreplay --intf1=lo final.pcap
