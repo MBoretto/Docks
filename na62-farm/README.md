@@ -93,6 +93,7 @@ Set */root/workspace* and select those projects:
 - na62-farm
 - na62-lib
 - na62-lib-networking
+- na62-lib-trigger-algorithm
 
 Then press Finish.
 
@@ -123,15 +124,26 @@ set USE_PFRING to NUSE_PFRING
 In na62-farm-lib-networking exclude from build the *PFring.cpp*: 
 Right click on the file -> Resources configuration -> Exclude from Build
 
+##Unset Thread affinity
+Open the file *AExecutable.cpp* and look for the function *AExecutable::SetThreadAffinity* change the line: 
+
+	#ifndef __APPLE__
+
+with: 
+
+	#ifdef __APPLE__
+
 ##Setting libs
-Open the project Properties dialog then: 
+For each project right click on the project and open Properties dialog. 
+Then go to the section: 
 
 	C/C++ Build-> settings
 
 ###Na62Farm
-This configuration 
+Na62-farm project configuration
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)  
+Before:  
 "${workspace_loc:/na62-farm-lib-networking}"  
 "${workspace_loc:/na62-trigger-algorithms}"  
 "${workspace_loc:/na62-farm-lib}"  
@@ -139,8 +151,7 @@ This configuration
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
-----
-
+After:  
 "${workspace_loc:/${ProjName}}"  
 "${workspace_loc:/na62-farm-lib}"  
 "${workspace_loc:/na62-farm-lib-networking}"  
@@ -149,20 +160,21 @@ This configuration
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
+Before:  
 "${workspace_loc:/na62-farm-lib-networking}"  
 "${workspace_loc:/na62-trigger-algorithms}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
------------------------
-
+After:  
 /usr/lib64  
 "${workspace_loc:/na62-farm-lib-networking}"  
 "${workspace_loc:/na62-trigger-algorithms}"  
 
 ####GCC C++ Linker -> Libraries
 - Libraries (-l)
+Before:  
 na62-farm-lib-networking  
 na62-trigger-algorithms  
 na62-farm-lib  
@@ -179,8 +191,8 @@ boost_system
 tbb  
 pfring  
 
--------------------
 
+After:  
 na62-farm-lib-networking  
 na62-trigger-algorithms  
 na62-farm-lib  
@@ -197,6 +209,7 @@ boost_system
 tbb  
 
 - Library search path (-L)  
+Before:  
 "${workspace_loc:/na62-farm-lib-networking/Debug}"  
 "${workspace_loc:/na62-trigger-algorithms/Debug_GLOG}"  
 "${workspace_loc:/na62-farm-lib/GLOG_DEBUG}"  
@@ -207,65 +220,78 @@ tbb
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/lib/intel64/gcc4.4  
 /afs/cern.ch/sw/lcg/contrib/gcc/4.8/x86_64-slc6-gcc48-opt/lib64/  
 
---------
-
+After:  
 "${workspace_loc:/na62-farm-lib-networking/Debug}"  
 "${workspace_loc:/na62-trigger-algorithms/Debug_GLOG}"  
 "${workspace_loc:/na62-farm-lib/GLOG_DEBUG}"  
 /usr/lib64  
 
-###Na62Farm-lib
+###Na62-Farm-lib
+Na62-farm-lib project configuration.
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)
+Before:  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 
-------------
-
+After:  
 /usr/lib64  
 
-###Na62Farm-lib-networking
+###Na62-Farm-lib-networking
+Na62-farm-lib-networking project configuration.
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)
+Before:  
 "${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
----------------
-
+After:  
 "${workspace_loc:/na62-farm-lib}"  
 /usr/lib64  
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
+Before:  
 "${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
-------
-
+After:  
 /usr/lib64  
 "${workspace_loc:/na62-farm-lib}"  
 
 
 ###Na62Farm-trigger-algorithms
-rkspace_loc:/na62-farm-lib}"  
+Before:  
+"${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/mkl/include  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 /afs/cern.ch/sw/lcg/external/Boost/1.55.0_python2.7/x86_64-slc6-gcc47-opt/include/boost-1_55/  
 /sw/opt/boost-1_55/include  
 
-----
-
+After:  
+"${workspace_loc:/na62-farm-lib}"  
 ####GCC C++ Compiler -> Includes
 - Include paths (-l)
 
+Before:  
+"${workspace_loc:/na62-farm-lib}"  
+
+After:  
+"${workspace_loc:/na62-farm-lib}"  
 
 ####GCC C compiler -> Includes
 - Include Path (-l)  
+Before:  
 "${workspace_loc:/na62-farm-lib}"  
+
+After:  
+"${workspace_loc:/na62-farm-lib}"  
+
+
 
 ##Start the farm locally
 ```
@@ -278,7 +304,7 @@ rkspace_loc:/na62-farm-lib}"
 
 ```
 
-#Adding jumbo frame suppor inside the virtual docker0 bridge
+##Adding jumbo frame suppor inside the virtual docker0 bridge
 MTU (maximum transmission unit) is the maximum packets dimension (in byte) allowed by the network interface.
 Packets payload in every-day-life hardware is limited to 1500 byte.
 NA62 exploits jumbo packets to transmits data to the farm. 
@@ -303,7 +329,9 @@ then:
 you can check updated MTU with
 
 	ifconfig
+##
 
 ## Replay the traffic with tcpreplay
 http://xmodulo.com/how-to-capture-and-replay-network-traffic-on-linux.html
-tcpreplay --intf1=lo final.pcap
+
+	tcpreplay --intf1=lo final.pcap
