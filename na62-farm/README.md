@@ -1,9 +1,9 @@
 #Na62-farm
 This container recreate the environment of the na62-farm experiment.
-I used the ubunutu 15.10 distribution.
+I used the *Ubuntu 15.10* distribution and   
+*Docker version 1.9.1, build a34a1d5*.  
 ##Get Docker
-
-	sudo apt-get -y install docker.io
+	curl -sSL https://get.docker.com/ | sh
 
 Use docker without sudo:
 
@@ -42,6 +42,26 @@ Edit */etc/default/docker*, uncomment the line:
 and add the dns previously found.
 
     sudo service docker restart
+####Dns troubleshooting with docker 1.9.1 
+Instruction above regarding */etc/default/docker* doesn't work..
+
+	sudo vim /lib/systemd/system/docker.service
+
+Replace the line:  
+
+	ExecStart=/usr/bin/docker daemon -H fd://
+
+with:  
+
+	ExecStart=/usr/bin/docker daemon -H fd:// --dns <your dns ip>
+
+then
+
+	systemctl daemon-reload
+	sudo service docker restart
+	sudo systemctl status docker
+
+
 
 ##Start the container
 If the container has been build correctly start it with:
