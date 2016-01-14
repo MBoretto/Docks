@@ -69,7 +69,13 @@ Add a user to the list of authorised access to the X server.
 
 	xhost si:localuser:root
 
-This operation should be done each time you restart your computer, it's a good idea add this command in the *.bashrc* file.
+This operation should be done each time you restart your computer, it's a good idea add this line in your *.bashrc* :
+
+	xhost si:localuser:root 1>/dev/null
+
+If you get an error like *D-Bus library appears to be incorrectly set up; failed to read machine uuid: Failed to open "/etc/machine-id": No such file or directory* on eclipse startup type:
+
+	dbus-uuidgen > /var/lib/dbus/machine-id
 
 ### Tips for develop
 If you need an additional terminals to work with the farm container type:
