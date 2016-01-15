@@ -251,7 +251,7 @@ After:
 ###Na62-Farm-lib
 Na62-farm-lib project configuration.
 ####GCC C++ Compiler -> Includes
-- Include paths (-l)
+- Include paths (-l)  
 Before:  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
 
@@ -261,7 +261,7 @@ After:
 ###Na62-Farm-lib-networking
 Na62-farm-lib-networking project configuration.
 ####GCC C++ Compiler -> Includes
-- Include paths (-l)
+- Include paths (-l)  
 Before:  
 "${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
@@ -273,7 +273,7 @@ After:
 /usr/lib64  
 
 ####GCC C compiler -> Includes
-- Include Path (-l)  
+- Include Path (-l)    
 Before:  
 "${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
