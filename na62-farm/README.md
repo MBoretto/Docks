@@ -37,11 +37,12 @@ Identify your DNS using the following commad:
 
 Edit */etc/default/docker*, uncomment the line:  
 
-    DOCKER_OPTS="--dns <your_dns_server_1> --dns <your_dns_server_2>"
+	DOCKER_OPTS="--dns <your_dns_server_1> --dns <your_dns_server_2>"
+
 
 and add the dns previously found.
 
-    sudo service docker restart
+	sudo service docker restart
 ####Dns troubleshooting with docker 1.9.1 
 Instruction above regarding */etc/default/docker* doesn't work..
 
@@ -78,12 +79,12 @@ Open the widonw: Help->Install New Software
 Check avaible software, and install:
 
 - C/C++ Development Tools SDK
-- Git extension
+- Eclipse GIT team provider
 
-All the eclipse extension will be stored in the home directory */root/* this directory is shared with the filesystem so you don't need to reinstall extension every time.
+All the Eclipse extension will be stored in the home directory */root/* this directory is shared with the filesystem so **you don't need to reinstall extension every time**.
 
 ###X11 troubleshooting   
-If x11 is not setted properly GUI program (Eclipse) lauched inside the container will fail.
+If X11 is not setted properly GUI program (Eclipse) Lauched inside the container will fail.
 Here's how to fix it:
 Add a user to the list of authorised access to the X server.
 
@@ -111,9 +112,9 @@ File->Import
 
 Set */root/workspace* and select those projects:
 - na62-farm
-- na62-lib
-- na62-lib-networking
-- na62-lib-trigger-algorithm
+- na62-farm-lib
+- na62-farm-lib-networking
+- na62-trigger-algorithms
 
 Then press Finish.
 
@@ -141,11 +142,13 @@ For each one open project properties dialog then:
 set USE_PFRING to NUSE_PFRING
 
 
-In na62-farm-lib-networking exclude from build the *PFring.cpp*: 
+In na62-farm-lib-networking exclude from build the *socket/PFring.cpp*: 
 Right click on the file -> Resources configuration -> Exclude from Build
 
+Set Debug.
 ##Unset Thread affinity
-Open the file *AExecutable.cpp* and look for the function *AExecutable::SetThreadAffinity* change the line: 
+Consider repository na62-farm-lib.  
+Open the file *utilis/AExecutable.cpp* and look for the function *AExecutable::SetThreadAffinity* change the line: 
 
 	#ifndef __APPLE__
 
@@ -172,7 +175,6 @@ Before:
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
 After:  
-"${workspace_loc:/${ProjName}}"  
 "${workspace_loc:/na62-farm-lib}"  
 "${workspace_loc:/na62-farm-lib-networking}"  
 "${workspace_loc:/na62-trigger-algorithms}"  
@@ -188,9 +190,9 @@ Before:
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
 After:  
-/usr/lib64  
 "${workspace_loc:/na62-farm-lib-networking}"  
 "${workspace_loc:/na62-trigger-algorithms}"  
+/usr/lib64  
 
 ####GCC C++ Linker -> Libraries
 - Libraries (-l)
@@ -279,11 +281,13 @@ Before:
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/tbb/include  
 
 After:  
-/usr/lib64  
 "${workspace_loc:/na62-farm-lib}"  
+/usr/lib64  
 
 
 ###Na62Farm-trigger-algorithms
+####GCC C++ Compiler -> Includes
+- Include Path (-l)  
 Before:  
 "${workspace_loc:/na62-farm-lib}"  
 /afs/cern.ch/sw/IntelSoftware/linux/x86_64/xe2013/composer_xe_2013_sp1.2.144/ipp/include  
@@ -294,22 +298,8 @@ Before:
 
 After:  
 "${workspace_loc:/na62-farm-lib}"  
-####GCC C++ Compiler -> Includes
 - Include paths (-l)
 
-Before:  
-"${workspace_loc:/na62-farm-lib}"  
-
-After:  
-"${workspace_loc:/na62-farm-lib}"  
-
-####GCC C compiler -> Includes
-- Include Path (-l)  
-Before:  
-"${workspace_loc:/na62-farm-lib}"  
-
-After:  
-"${workspace_loc:/na62-farm-lib}"  
 
 
 
