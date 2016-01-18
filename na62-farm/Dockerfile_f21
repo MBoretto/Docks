@@ -1,4 +1,4 @@
-FROM centos:7
+FROM fedora:21
 MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 
 # Update system... 
@@ -9,7 +9,8 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 #RUN yum update -y && yum clean all
 
 # Install prerequisites.
-RUN yum install epel-release -y
+RUN yum install eclipse libcanberra-gtk3 -y
+
 RUN yum install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
 #    bind-utils net-tools tcpreplay pcapfix iputils nc \
@@ -22,16 +23,6 @@ RUN yum install wget tar file mlocate vim htop unzip\
     gperftools gperftools-libs \ 
 #Those are required from DIM
     tcsh motif-devel -y
-RUN yum install libcanberra-gtk3 java -y
-#http://www.panticz.de/install-eclipse#install eclipse 
-
-RUN wget -q http://eclipse.bluemix.net/packages/mars.1/data/eclipse-cpp-mars-1-linux-gtk-x86_64.tar.gz -P /tmp
-RUN tar xzf /tmp/eclipse-*-linux-gtk*.tar.gz -C /usr/lib/
-
-RUN chown -R root:root /usr/lib/eclipse
-RUN chmod -R +r /usr/lib/eclipse
-RUN ln -s /usr/lib/eclipse/eclipse /bin/eclipse
-
 
 #due to a docker bug problem wireshark is not working
 #RUN yum install wireshark -y

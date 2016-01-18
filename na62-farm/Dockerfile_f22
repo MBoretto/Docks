@@ -1,4 +1,4 @@
-FROM centos:7
+FROM fedora:22
 MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 
 # Update system... 
@@ -6,14 +6,14 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 # since you are not controlling which version of the software 
 # will be installed on your system.
 # This may cause not predictable misbehaviours.
-#RUN yum update -y && yum clean all
+#RUN dnf update -y && dnf clean all
 
 # Install prerequisites.
-RUN yum install epel-release -y
-RUN yum install wget tar file mlocate vim htop unzip\
+RUN dnf install eclipse libcanberra-gtk3 -y
+
+RUN dnf install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
-#    bind-utils net-tools tcpreplay pcapfix iputils nc \
-    bind-utils net-tools tcpreplay pcapfix nc \
+    bind-utils net-tools tcpreplay pcapfix iputils nc \
     git gcc-c++ make \
     valgrind gdb \
     tbb tbb-devel boost boost-devel \
@@ -22,19 +22,9 @@ RUN yum install wget tar file mlocate vim htop unzip\
     gperftools gperftools-libs \ 
 #Those are required from DIM
     tcsh motif-devel -y
-RUN yum install libcanberra-gtk3 java -y
-#http://www.panticz.de/install-eclipse#install eclipse 
-
-RUN wget -q http://eclipse.bluemix.net/packages/mars.1/data/eclipse-cpp-mars-1-linux-gtk-x86_64.tar.gz -P /tmp
-RUN tar xzf /tmp/eclipse-*-linux-gtk*.tar.gz -C /usr/lib/
-
-RUN chown -R root:root /usr/lib/eclipse
-RUN chmod -R +r /usr/lib/eclipse
-RUN ln -s /usr/lib/eclipse/eclipse /bin/eclipse
-
 
 #due to a docker bug problem wireshark is not working
-#RUN yum install wireshark -y
+RUN dnf install wireshark -y
 #wireshark provided by seems not work..
 #RUN rpm -ivh ftp://fr2.rpmfind.net/linux/fedora/linux/updates/testing/22/x86_64/w/wireshark-1.12.8-1.fc22.x86_64.rpm
 
