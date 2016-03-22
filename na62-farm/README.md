@@ -20,7 +20,7 @@ Download the container image from this repository
 
 move to the na62 dir and build the container with:
 	
-	./install
+	./install.sh
 
 This command will create the *root/workspace/* directory and clone inside all the na62 repositories.
 Please notice that this directory is shared with the container */root/* home directory. 
@@ -117,7 +117,7 @@ then
 ##Start the container
 If the container has been build correctly start it with:
 
-	./run
+	./run.sh
 
 ##Start eclipse for the first time
 
@@ -180,7 +180,7 @@ Projects properties are accessible with:
 ##Remove PFring dependencies
 Consider the following projects:
 
-- na62-farm   
+- na62-farm 
 - na62-farm-lib-networking
 
 
