@@ -149,9 +149,7 @@ If you get an error like *D-Bus library appears to be incorrectly set up; failed
 	dbus-uuidgen > /var/lib/dbus/machine-id
 
 ### Tips for develop
-If you need an additional terminals to work with the farm container type:
-
-	docker exec -it <container-id press tab to autocomplete> bash
+If you need an additional terminals to work in the farm container rururunexec.sh
 
 ##Import the Projects
 Start Eclipse and press: 
