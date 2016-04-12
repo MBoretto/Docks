@@ -8,13 +8,17 @@
 #	na62-farm
 
 
-
-
 docker run -it --rm \
-   -v `pwd`/root:/root \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    -e DISPLAY=unix$DISPLAY \
-	na62-farm
+	root-cern
+
+#docker run -it --rm \
+#   --security-opt "apparmor:docker-ptrace" \
+#   -v `pwd`/root:/root \
+#   -v /tmp/.X11-unix:/tmp/.X11-unix \
+#   -e DISPLAY=unix$DISPLAY \
+#	na62-farm
 
 #docker run -it --rm \
 #   -v `pwd`/root:/root \
