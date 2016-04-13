@@ -7,13 +7,13 @@
 #	-e DISPLAY=unix$DISPLAY \
 #	na62-farm
 
-
+#docker run -it --rm  --name=na62-farm-run na62-farm
+   #--security-opt "apparmor:docker-ptrace" \
 docker run -it --rm \
-   --security-opt "apparmor:docker-ptrace" \
+   --name=na62-farm-run \
    -v `pwd`/root:/root \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    -e DISPLAY=unix$DISPLAY \
-   --name=na62-farm-run \
 	na62-farm
 
 #docker run -it --rm \
