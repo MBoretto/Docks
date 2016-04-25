@@ -15,7 +15,7 @@ RUN yum install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
 #    bind-utils net-tools tcpreplay pcapfix iputils nc \
     bind-utils net-tools tcpreplay pcapfix nc \
-    git gcc-c++ make \
+    git gcc-c++ make cmake\
     valgrind gdb \
     tbb tbb-devel boost boost-devel \
     glog glog-devel gflags-devel \
