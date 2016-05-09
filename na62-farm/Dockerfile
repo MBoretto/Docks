@@ -35,10 +35,10 @@ ADD usr/include/linux/pf_ring.h /usr/include/linux/
 ADD usr/local/include/pfring.h /usr/local/include/
 
 #installing DIM
-ADD compileDIM /compileDIM
+ADD compileDIM.csh /compileDIM.csh
 
 #DIM is compiled in  tcsh environment as described in the official documentation
-RUN ./compileDIM && \
+RUN ./compileDIM.csh && \
 #a sort of make install
 	cp -R /dim_v20r15/dim/ /usr/local/include/ && \
 	cp /dim_v20r15/obj/libdim.* /usr/local/lib/
