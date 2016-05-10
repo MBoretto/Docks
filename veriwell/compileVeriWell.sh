@@ -19,4 +19,4 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-echo '=> Veriwell ha been intalled!'
+echo '=> Veriwell has been installed!'
