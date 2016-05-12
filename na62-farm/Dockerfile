@@ -9,8 +9,7 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 #RUN dnf update -y && dnf clean all
 
 # Install prerequisites.
-RUN dnf install eclipse libcanberra-gtk3 -y
-
+RUN dnf remove vim-minimal -y
 RUN dnf install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
     bind-utils net-tools tcpreplay pcapfix iputils nc \
@@ -19,7 +18,8 @@ RUN dnf install wget tar file mlocate vim htop unzip\
     tbb tbb-devel boost boost-devel \
     glog glog-devel gflags-devel \
     cppzmq-devel libpcap libpcap-devel \
-    gperftools gperftools-libs \ 
+    gperftools gperftools-libs \
+    eclipse libcanberra-gtk3 \
 #Those are required from DIM
     tcsh motif-devel -y
 
