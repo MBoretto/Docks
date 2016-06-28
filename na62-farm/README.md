@@ -194,6 +194,15 @@ In na62-farm-lib-networking exclude from build the *socket/PFring.cpp*:
 Right click on the file -> Resources configuration -> Exclude from Build
 
 Set Debug.
+###Compile PFring
+PFring can be compileted inside the container exploiting the commands:  
+
+	compilePFring.sh
+
+Please notice that this command can be performed just when the container is running
+since the Kernel dependecies, to produce the pfring kernel modules,
+are mounted as volume during the `./run.sh` startup.
+
 ##Unset Thread affinity
 Consider repository na62-farm-lib.  
 Open the file *utilis/AExecutable.cpp* and look for the function *AExecutable::SetThreadAffinity* change the line: 
