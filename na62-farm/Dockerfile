@@ -21,7 +21,9 @@ RUN dnf install wget tar file mlocate vim htop unzip\
     gperftools gperftools-libs \
     eclipse libcanberra-gtk3 \
 #Those are required from DIM
-    tcsh motif-devel -y
+    tcsh motif-devel \
+#Those are required from pfring
+    flex bison -y
 
 #due to a docker bug problem wireshark is not working
 RUN dnf install wireshark -y
@@ -36,6 +38,7 @@ ADD usr/local/include/pfring.h /usr/local/include/
 
 #installing DIM
 ADD compileDIM.csh /compileDIM.csh
+ADD compilePFRING.sh /compilePFRING.sh
 
 #DIM is compiled in  tcsh environment as described in the official documentation
 RUN ./compileDIM.csh && \
