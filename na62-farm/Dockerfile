@@ -38,7 +38,6 @@ ADD usr/local/include/pfring.h /usr/local/include/
 
 #installing DIM
 ADD compileDIM.csh /compileDIM.csh
-ADD compilePFRING.sh /compilePFRING.sh
 
 #DIM is compiled in  tcsh environment as described in the official documentation
 RUN ./compileDIM.csh && \
@@ -49,7 +48,9 @@ RUN ./compileDIM.csh && \
 #Move farm configuration files
 ADD etc/na62-farm.cfg /etc/na62-farm.cfg
 ADD etc/na62-trigger.conf /etc/na62-trigger.conf
-  
+
+ADD compilePFRING.sh /compilePFRING.sh
+
 #update the locate db
 RUN updatedb
 
