@@ -2,6 +2,6 @@
 
 docker exec \
    -it \
-   na62-farm-run \
-   bash 
+   na62-farm \
+   /bin/bash 
 

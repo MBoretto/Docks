@@ -9,15 +9,17 @@
 
 #docker run -it --rm  --name=na62-farm-run na62-farm
    #--security-opt "apparmor:docker-ptrace" \
+   #--security-opt "apparmor:docker-ptrace" \
 docker run -it --rm \
-   --name=na62-farm-run \
-   --security-opt "apparmor:docker-ptrace" \
+   --name=na62-farm \
    -v `pwd`/root:/root \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    -v /lib/modules:/lib/modules \
    -v /usr/src:/usr/src \
    -e DISPLAY=unix$DISPLAY \
-   -h na62farm na62-farm
+   -h na62farm \
+   cnt-na62-farm \
+   /bin/bash
 
 #docker run -it --rm \
 #   -v `pwd`/root:/root \

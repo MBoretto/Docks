@@ -1,4 +1,4 @@
-FROM fedora:23
+FROM fedora:24
 MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 
 # Update system... 
@@ -12,7 +12,7 @@ MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 RUN dnf remove vim-minimal -y
 RUN dnf install wget tar file mlocate vim htop unzip\
     psmisc procps-ng \
-    bind-utils net-tools tcpreplay pcapfix iputils nc \
+    bind-utils net-tools tcpreplay pcapfix nc \
     git gcc-c++ make cmake\
     valgrind gdb \
     tbb tbb-devel boost boost-devel \
@@ -55,4 +55,4 @@ ADD compilePFRING.sh /compilePFRING.sh
 RUN updatedb
 
 WORKDIR /root
-CMD /bin/bash
+CMD eclipse
