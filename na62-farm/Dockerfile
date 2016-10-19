@@ -1,4 +1,4 @@
-FROM fedora:24
+FROM fedora:23
 MAINTAINER Marco Boretto  marco.boretto@cern.ch marco.bore@gmail.com
 
 # Update system... 
@@ -23,7 +23,10 @@ RUN dnf install wget tar file mlocate vim htop unzip\
 #Those are required from DIM
     tcsh motif-devel \
 #Those are required from pfring
-    flex bison -y
+    flex bison \
+    # Needed by the custom xml parser
+    libxslt-devel libxml++-devel libxml2-devel \
+    -y
 
 #due to a docker bug problem wireshark is not working
 RUN dnf install wireshark -y
@@ -55,4 +58,4 @@ ADD compilePFRING.sh /compilePFRING.sh
 RUN updatedb
 
 WORKDIR /root
-CMD eclipse
+CMD /usr/bin/eclipse
