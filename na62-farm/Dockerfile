@@ -20,9 +20,9 @@ RUN dnf install wget tar file mlocate vim htop unzip\
     cppzmq-devel libpcap libpcap-devel \
     gperftools gperftools-libs \
     eclipse libcanberra-gtk3 \
-#Those are required from DIM
-    tcsh motif-devel \
-#Those are required from pfring
+    #This is required from DIM
+    motif-devel \
+    #Those are required from pfring
     flex bison \
     # Needed by the custom xml parser
     libxslt-devel libxml++-devel libxml2-devel \
@@ -34,13 +34,12 @@ RUN dnf install wireshark -y
 #RUN rpm -ivh ftp://fr2.rpmfind.net/linux/fedora/linux/updates/testing/22/x86_64/w/wireshark-1.12.8-1.fc22.x86_64.rpm
 
 
-
 #Adding some pfring include needed to compile
 ADD usr/include/linux/pf_ring.h /usr/include/linux/
 ADD usr/local/include/pfring.h /usr/local/include/
 
 #installing DIM
-ADD compileDIM.csh /compileDIM.csh
+ADD compileDIM.sh /compileDIM.sh
 
 #DIM is compiled in  tcsh environment as described in the official documentation
 RUN ./compileDIM.csh && \
