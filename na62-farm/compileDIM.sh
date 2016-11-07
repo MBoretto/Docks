@@ -30,4 +30,9 @@ cp ${ODIR}/libdim.* /usr/local/lib64/
 echo "-> Updating shared libraries.."
 echo '/usr/local/lib64' > /etc/ld.so.conf.d/dim.conf
 ldconfig
+
+echo "-> Copying dns and did executables.."
+cp linux/did /usr/local/bin/
+cp linux/dns /usr/local/bin/
+
 echo "-> Done!"

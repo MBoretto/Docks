@@ -1,0 +1,11 @@
+[Unit]
+Description=Dim Server
+Requires=default.target
+
+[Service]
+#Restart=always
+Environment=DIM_DNS_NODE=belafonte1.cern.ch
+ExecStart=/usr/local/bin/dns
+
+[Install]
+WantedBy=default.target
