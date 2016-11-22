@@ -15,10 +15,10 @@ pipelines:
   default:
     - step:
         script:
-          - service mysql start
-          - exec /usr/bin/mysqld_safe 
-          - mysql -h localhost -u root -proot -e "CREATE DATABASE test;"
+          - /usr/bin/mysqld --defaults-file=/etc/mysql/my.cnf --skip-grant-table &
           - composer install
           - vendor/bin/phpcs --report=full --extensions=php -np --standard=build/phpcs .
-          - vendor/bin/phpunit
+          - while [ ! -e /run/mysqld/mysqld.sock ]; do echo "=> Waiting for confirmation of MySQL service startup.."; inotifywait -e create -q /run/mysqld/; done                                                   
+          - mysql -h localhost -u root -e "CREATE DATABASE test;"¬
+          - vendor/bin/phpunit¬
 ```
