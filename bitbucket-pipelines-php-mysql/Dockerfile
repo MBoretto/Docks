@@ -18,6 +18,10 @@ ADD container-files/ /
 
 RUN \ 
   mkdir -p /run/mysqld/ \ 
-  mkdir -p /var/log/  
+  mkdir -p /var/log/ \ 
+  mkdir -p /mysql/ \
+  mkdir -p /var/log/binary-logs/
+
+
 
 
