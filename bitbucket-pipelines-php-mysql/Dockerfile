@@ -13,7 +13,7 @@ RUN apk add --update bash git vim curl \
   rm -rf /var/cache/apk/*
 
 ENV \
-    TERM=xterm 
+    TERM=xterm \
     MYSQL_USER=admin \
     MYSQL_PASS=**Random** \
     EXTRA_OPTS=" --defaults-file=/etc/mysql/my.cnf " \
