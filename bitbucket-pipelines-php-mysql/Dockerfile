@@ -12,27 +12,12 @@ RUN apk add --update bash git vim curl \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
   rm -rf /var/cache/apk/*
 
-ENV \
-    TERM=xterm \
-    MYSQL_USER=admin \
-    MYSQL_PASS=**Random** \
-    EXTRA_OPTS=" --defaults-file=/etc/mysql/my.cnf " \
-    ON_CREATE_DB=**False** \
-    STARTUP_SQL=**False**
+ENV TERM=xterm 
 
-#nginx
-#EXPOSE 80 443
-#mysql phpmyadmin can work without this
-#EXPOSE 3306
-
-
-#I need to do this because of a php5.6  bug
 ADD container-files/ /
 
-
-#php add www user and group
 RUN \ 
-  addgroup www && \
-  adduser -SG www www
+  mkdir -p /run/mysqld/ \ 
+  mkdir -p /var/log/  
 
 
