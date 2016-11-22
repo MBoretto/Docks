@@ -27,7 +27,7 @@ ENV \
 
 
 #I need to do this because of a php5.6  bug
-COPY php.ini /etc/php/php.ini
+ADD container-files/ /
 
 
 #php add www user and group

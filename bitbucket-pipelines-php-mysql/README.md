@@ -16,9 +16,9 @@ pipelines:
     - step:
         script:
           - service mysql start
+          - exec /usr/bin/mysqld_safe 
           - mysql -h localhost -u root -proot -e "CREATE DATABASE test;"
           - composer install
           - vendor/bin/phpcs --report=full --extensions=php -np --standard=build/phpcs .
-          - vendor/bin/phpunit tests/HelpersTest.php tests/HashtagsTest.php
           - vendor/bin/phpunit
 ```
